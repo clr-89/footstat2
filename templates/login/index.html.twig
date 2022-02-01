@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger text-center mt-3">Tes identifiants sont invalides</div>
+    {% endif %}
+<div class="d-flex justify-content-center">
+    <form class="w-50 py-2 my-5 d-flex flex-column py-3" action="{{ path('login') }}" method="post">
+        <label class="text-light text-center my-2 fs-3" for="username">Email</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+
+        <label class="text-light text-center my-2 fs-3" for="password">Mot de passe</label>
+        <input type="password" id="password" name="_password"/>
+
+        {# If you want to control the URL the user is redirected to on success
+        <input type="hidden" name="_target_path" value="/account"/> #}
+
+        <button class="btn mt-5 bg-white w-25 rounded bg-primary mx-auto" type="submit">Se connecter</button>
+    </form>
+</div>
+{% endblock %}
