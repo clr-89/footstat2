@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -51,6 +53,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="user")
+     */
+    private $games;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Statistique::class, mappedBy="user")
+     */
+    private $statistiques;
+
+    public function __construct()
+    {
+        $this->games = new ArrayCollection();
+        $this->statistiques = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -173,6 +191,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Game[]
+     */
+    public function getGames(): Collection
+    {
+        return $this->games;
+    }
+
+    public function addGame(Game $game): self
+    {
+        if (!$this->games->contains($game)) {
+            $this->games[] = $game;
+            $game->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGame(Game $game): self
+    {
+        if ($this->games->removeElement($game)) {
+            $game->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Statistique[]
+     */
+    public function getStatistiques(): Collection
+    {
+        return $this->statistiques;
+    }
+
+    public function addStatistique(Statistique $statistique): self
+    {
+        if (!$this->statistiques->contains($statistique)) {
+            $this->statistiques[] = $statistique;
+            $statistique->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatistique(Statistique $statistique): self
+    {
+        if ($this->statistiques->removeElement($statistique)) {
+            // set the owning side to null (unless already changed)
+            if ($statistique->getUser() === $this) {
+                $statistique->setUser(null);
+            }
+        }
 
         return $this;
     }
