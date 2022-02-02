@@ -20,6 +20,7 @@ class UserFixtures extends Fixture
     {
         $admin = new User;
         $admin->setPseudo('Mathias');
+        $admin->setPicture('mathias.jpg');
         $admin->setEmail('marchand.mathias@gmail.com');
         $admin->setRoles(['ROLE_ADMIN']);
         $hashedPassword = $this->passwordHasher->hashPassword(
@@ -29,16 +30,17 @@ class UserFixtures extends Fixture
         $admin->setPassword($hashedPassword);
         $manager->persist($admin);
 
-        $user = new User;
-        $user->setPseudo('Claire');
-        $user->setEmail('clr.minier@gmail.com');
-        $user->setRoles(['ROLE_USER']);
+        $admin2 = new User;
+        $admin2->setPseudo('Rémi');
+        $admin2->setPicture('remi.jpg');
+        $admin2->setEmail('r.guevel@hays.fr');
+        $admin2->setRoles(['ROLE_ADMIN']);
         $hashedPassword = $this->passwordHasher->hashPassword(
-            $user,
-            'worstfootever'
+            $admin2,
+            'hellofootball'
         );
-        $user->setPassword($hashedPassword);
-        $manager->persist($user);
+        $admin2->setPassword($hashedPassword);
+        $manager->persist($admin2);
 
         $manager->flush();
     }

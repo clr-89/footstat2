@@ -1,15 +1,19 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex flex-row fs-1 me-5" href="#">Footstat <img class="foot-navbar d-none d-sm-block ms-2" src="{{ asset('build/images/ballon.png')}}"></a>
+        <a class="navbar-brand d-flex flex-row fs-1 me-5" href="/">Footstat <img class="foot-navbar d-none d-sm-block ms-2" src="{{ asset('build/images/ballon.png')}}"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active fs-3 me-5" aria-current="page" href="/">Stats générales</a>
+                <a class="nav-link active fs-3 me-5" aria-current="page" href="/profile">Stats générales</a>
                     {% if app.user %}
-                        <a class="nav-link fs-3 me-5" href="/">Stats de {{ app.user.pseudo }}</a>
+                        <a class="nav-link fs-3 me-5" href="/">Stats de {{ app.user.pseudo }}
+                            {% if app.user.picture %}
+                            <img class="user-picture rounded-circle" src="{{ asset('build/images/' ~ app.user.picture) }}">
+                            {% endif %}
+                        </a>
                         {% for role in app.user.roles %}
                             {% if role == 'ROLE_ADMIN' %}
                                 <li class="nav-item dropdown">
@@ -17,13 +21,13 @@
                                         Admin
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item fs-5me-5" href="/">Créer une partie</a>
-                                        <li><a class="dropdown-item" href="#">Créer un utilisateur</a></li>
+                                        <a class="dropdown-item fs-4 me-5" href="/">Créer une partie</a>
+                                        <li><a class="dropdown-item fs-4" href="{{ path('app_register') }}">Créer un joueur</a></li>
                                     </ul>
                                 </li>
                             {% endif %}
                         {% endfor %}
-                <a class="nav-link fs-3 me-5" href="{{ path('app_logout') }}"> Se déconnecter <i class="fa-solid fa-user fs-4"></i></a>
+                <a class="nav-link fs-3 me-5" href="{{ path('app_logout') }}"> Se déconnecter </a>
                 {% else %}
                 <a class="nav-link fs-3 me-5" href="{{ path('login') }}"> Se connecter <i class="fa-solid fa-user fs-4"></i></a>
                     {% endif %}

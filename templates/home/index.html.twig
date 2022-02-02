@@ -3,7 +3,22 @@
 {% block title %}Footstat{% endblock %}
 
 {% block body %}
-    <h1></h1>
+    {% for category, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="text-center mt-2 fs-3 alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="home">
+        <h1 class="text-center text-light my-5">Bienvenue sur Footstat</h1>
+        <p class="fs-4 mx-auto text-center text-light w-75 border border-primary border-3 px-3 py-2 rounded">Récupère un mot de passe avec ton superAdmin et check tes résultats ainsi que ceux des autres.
+        <div class="text-center">
+            <img class="img-home mx-auto w-50 d-none d-sm-block" src="{{ asset('build/images/stat.jpeg') }}">
+            <img class="mx-auto w-100 d-block mb-1 mt-5 d-sm-none" src="{{ asset('build/images/stat.jpeg') }}">
+        </div>
+        </p>
+    </div>
 
 {% endblock %}
 
