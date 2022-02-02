@@ -57,7 +57,7 @@ class AdminController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Les stats du joueur ont bien été prises en compte !');
-            return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_new_stats', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render('admin/statByPlayer.html.twig', [
             "form" => $form->createView(),

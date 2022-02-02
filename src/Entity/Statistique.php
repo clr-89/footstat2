@@ -42,6 +42,7 @@ class Statistique
      */
     private $game;
 
+
     public function getId(): ?int
     {
         return $this->id;
