@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Créer une partie{% endblock %}
+
+{% block body %}
+<div class="new-game container-fluid">
+    <h1 class="mt-5 text-light text-center pb-3 m-5 border-bottom border-primary border-3 fs-1">Créer une partie</h1>
+    <div class="d-flex flex-row justify-content-center">
+        {{ form_start(form) }}
+        <div class="d-flex flex-column align-items-end ">
+            <div class="my-2 fs-4 text-light">{{ form_widget(form) }}</div>
+            <button class="btn bg-light mt-5 me-4 fs-5 mx-auto" type="submit">Ajoute ce match</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

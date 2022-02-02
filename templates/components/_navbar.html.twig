@@ -7,8 +7,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active fs-3 me-5" aria-current="page" href="/profile">Stats générales</a>
                     {% if app.user %}
+                        <a class="nav-link active fs-3 me-5" aria-current="page" href="/profile">Stats générales</a>
                         <a class="nav-link fs-3 me-5" href="/">Stats de {{ app.user.pseudo }}
                             {% if app.user.picture %}
                             <img class="user-picture rounded-circle" src="{{ asset('build/images/' ~ app.user.picture) }}">
@@ -21,7 +21,8 @@
                                         Admin
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item fs-4 me-5" href="/">Créer une partie</a>
+                                        <a class="dropdown-item fs-4 me-5" href="{{ path('admin_new_game') }}">Créer une partie</a>
+                                        <a class="dropdown-item fs-4 me-5" href="{{ path('admin_new_stats') }}">Créer des statistiques par joueur</a>
                                         <li><a class="dropdown-item fs-4" href="{{ path('app_register') }}">Créer un joueur</a></li>
                                     </ul>
                                 </li>

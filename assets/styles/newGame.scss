@@ -1,10 +1,10 @@
-.register {
+.new-game {
     font-family: "Bebas Neue", cursive;
 
-    label {
-        color: white;
-    }
-    input {
+    .form-control {
         font-family: Arial, Helvetica, sans-serif;
+    }
+    label {
+
     }
 }

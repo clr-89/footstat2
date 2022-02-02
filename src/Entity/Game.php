@@ -45,6 +45,11 @@ class Game
         $this->statistiques = new ArrayCollection();
     }
 
+    public function getDateGame(): string
+    {
+        return $this->getDate()->format('d-m-Y');
+    }
+
     public function getId(): ?int
     {
         return $this->id;

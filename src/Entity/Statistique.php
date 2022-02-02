@@ -20,7 +20,7 @@ class Statistique
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $passesDÃecisives;
+    private $passesDecisives;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -47,14 +47,14 @@ class Statistique
         return $this->id;
     }
 
-    public function getPassesDÃecisives(): ?int
+    public function getPassesDecisives(): ?int
     {
-        return $this->passesDÃecisives;
+        return $this->passesDecisives;
     }
 
-    public function setPassesDÃecisives(?int $passesDÃecisives): self
+    public function setPassesDecisives(?int $passesDecisives): self
     {
-        $this->passesDÃecisives = $passesDÃecisives;
+        $this->passesDecisives = $passesDecisives;
 
         return $this;
     }
