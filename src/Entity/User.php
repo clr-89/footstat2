@@ -78,7 +78,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $buts;
     }
 
-    public function countTotalGames(): int
+    public function countButsByGameByPLayer() : array
+    {
+        $buts = [];
+        foreach ($this->getStatistiques() as $statistique) {
+            $buts[] = $statistique->getButs();
+        }
+        return $buts;
+    }
+
+    public function countPassesDecisivesByGameByPlayer(): array
+    {
+        $pd = [];
+        foreach ($this->getStatistiques() as $statistique) {
+            $pd[] = $statistique->getPassesDecisives();
+        }
+        return $pd;
+    }
+
+    public function showResultByGameByPlayer(): array
+    {
+        foreach ($this->getStatistiques() as $statistique) {
+            $pd[] = $statistique->getResultat();
+        }
+        return $pd;
+    }
+
+    public function countTotalGames()
     {
         return count($this->getGames());
     }

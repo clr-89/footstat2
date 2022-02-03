@@ -50,6 +50,7 @@ class Game
         return $this->getDate()->format('d-m-Y');
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
