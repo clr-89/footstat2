@@ -24,7 +24,7 @@ security:
                 # "login" is the name of the route created previously
                 login_path: login
                 check_path: login
-                default_target_path: /
+                default_target_path: stat_player
             logout:
                 path: app_logout
             # activate different ways to authenticate

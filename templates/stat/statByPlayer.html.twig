@@ -9,10 +9,18 @@
             <h2 class="text-primary text-center fs-2 mx-5 my-3">Mes stats générales</h2>
             <div class="d-flex flex-column">
                 <span class="text-light text-center mx-5 mb-2 fs-3"><span class="text-danger fs-3">{{ app.user.countTotalGames }}</span> match{{ app.user.countTotalGames > 1 ? 's' : '' }} joué{{ app.user.countTotalGames > 1 ? 's' : '' }}</span>
-                <span class="text-light text-center mx-5 mb-2 fs-3"><span class="text-danger fs-3">{{ app.user.countButsByPlayer }}</span> but{{ app.user.countButsByPlayer > 1 ? 's' : '' }} au total</span>
-                <span class="text-danger border-top border-light text-center fs-3">
-                    {% if app.user.countTotalGames > 0 %}{{ (app.user.countButsByPlayer / app.user.countTotalGames)|round(1, 'floor')}}{% endif %}
-                    <span class="text-light">but{{ (app.user.countButsByPlayer / app.user.countTotalGames)|round(1, 'floor') > 1 ? 's' : ''}} par match</span>
+                <span class="text-light text-center mx-5 mb-2 fs-3"><span class="text-danger fs-3">{{ app.user.countButsByPlayer }}</span> but{{ app.user.countButsByPlayer > 1 ? 's' : '' }}</span>
+                <span class="text-light text-center mx-5 mb-2 fs-3"><span class="text-danger fs-3">{{ app.user.countPassesDecisivesByPlayer }}</span> passe{{ app.user.countPassesDecisivesByPlayer > 1 ? 's' : '' }} décisive{{ app.user.countPassesDecisivesByPlayer > 1 ? 's' : '' }} </span>
+                <h3 class="text-primary text-center fs-2 mx-5 my-3 border-top border-light pt-3">Moyenne par match</h3>
+                <span class="text-danger text-center fs-3">
+                    {% if app.user.countTotalGames > 0 %}{{ (app.user.countButsByPlayer / app.user.countTotalGames)|round(1, 'floor')}}
+                    <span class="text-light">but{{ (app.user.countButsByPlayer / app.user.countTotalGames)|round(1, 'floor') > 1 ? 's' : ''}} </span>
+                    {% endif %}
+                </span>
+                <span class="text-danger text-center fs-3">
+                    {% if app.user.countTotalGames > 0 %}{{ (app.user.countPassesDecisivesByPlayer / app.user.countTotalGames)|round(1, 'floor')}}
+                        <span class="text-light">passe{{ (app.user.countPassesDecisivesByPlayer / app.user.countTotalGames)|round(1, 'floor') > 1 ? 's' : ''}} décisive{{ (app.user.countPassesDecisivesByPlayer / app.user.countTotalGames)|round(1, 'floor') > 1 ? 's' : ''}} </span>
+                    {% endif %}
                 </span>
             </div>
             <ul class="list-group mt-4 row">
@@ -20,11 +28,11 @@
                 <li class="list-group-item-dark text-black list-style-none py-3 px-2 fs-4 d-flex justify-content-center">
                 <span class="me-4">{{ game.dateGame }}</span>
                    <span>{% if app.user.showResultByGameByPlayer[loop.index-1] == 'V' %}
-                    <i class="text-primary fas fa-circle"></i>
+                    <i class="text-primary fs-5 fas fa-circle"></i>
                     {% elseif app.user.showResultByGameByPlayer[loop.index-1] == 'D'%}
-                        <i class="text-danger fas fa-circle"></i>
+                        <i class="text-danger fs-5 fas fa-circle"></i>
                     {% else %}
-                        <i class="text-warning fas fa-circle"></i>
+                        <i class="text-warning fs-5 fas fa-circle"></i>
                     {% endif %}
                    </span>
                     <span class="ms-4">  {{ app.user.countButsByGameByPLayer[loop.index-1] }} but{{ app.user.countButsByGameByPLayer[loop.index-1] > 1 ? 's' : ''}}</span>
@@ -32,6 +40,6 @@
                  </li>
             {% endfor %}
             </ul>
-              {% endif %}
+         {% endif %}
    </div>
 {% endblock %}

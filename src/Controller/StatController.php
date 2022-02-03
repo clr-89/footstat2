@@ -6,6 +6,7 @@ use App\Entity\Game;
 use App\Entity\Statistique;
 use App\Entity\User;
 use App\Repository\GameRepository;
+use App\Repository\StatistiqueRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +31,17 @@ class StatController extends AbstractController
             'user' => $user,
             'game' => $game,
             'statistiques' => $statistiques,
+        ]);
+    }
+    /**
+     * @Route("/stats", name="players")
+     */
+    public function showStatAllPlayers(StatistiqueRepository $statistiqueRepository, ManagerRegistry $managerRegistry):Response
+    {
+        $users = $managerRegistry->getRepository(User::class)->findAll();
+        return $this->render('stat/statAllPlayers.html.twig', [
+            'users' => $users,
+            'statistiques'  => $statistiqueRepository->lastOne(),
         ]);
     }
 }

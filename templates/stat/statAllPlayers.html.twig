@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+    <div class="statistique container-fluid">
+        <h1 class="mt-5 text-light text-center pb-3 m-5 border-bottom border-primary border-3 fs-1">Statistiques générales</h1>
+        <table class="ms-2 d-flex justify-content-center">
+            <tr class="text-primary border-bottom border-primary">
+                <th>Joueur</th>
+                {% for role in app.user.roles %}
+                    {% if role  == 'ROLE_ADMIN' %}
+                <td class="pe-2">Matchs</td>
+                    {% endif %}
+                {% endfor %}
+                <td class="pe-2">Buts</td>
+                <td class="pe-3">PD</td>
+                <td class="py-2">Derniers matchs</td>
+                <td>Buts / match</td>
+            </tr>
+            {% for user in users %}
+                <tr class="bg-dark text-light border-bottom border-secondary fs-5">
+                    <th class="w-25 pe-3 py-2">{{ user.pseudo }}</th>
+                    {% for role in app.user.roles %}
+                        {% if role  == 'ROLE_ADMIN' %}
+                    <td class="">{{ user.countTotalGames }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td class="">{{ user.countButsByPlayer }}</td>
+                    <td class="">{{ user.countPassesDecisivesByPlayer }}</td>
+                    <td class="">
+                        {% for resultat in user.showResultByGameByPlayer %}
+                            {% if resultat == 'V' %}
+                                <i class="text-primary fas fa-circle"></i>
+                            {% elseif resultat == 'D'%}
+                                <i class="text-danger fas fa-circle"></i>
+                            {% else %}
+                                <i class="text-warning fas fa-circle"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="w-25">{% if user.countTotalGames > 0 %}{{ (user.countButsByPlayer / user.countTotalGames)|round(1, 'floor')}}{% endif %}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

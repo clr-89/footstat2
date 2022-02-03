@@ -78,6 +78,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $buts;
     }
 
+    public function countPassesDecisivesByPlayer()
+    {
+        $pd = 0;
+        foreach ($this->getStatistiques() as $statistique) {
+            $pd += $statistique->getPassesDecisives();
+        }
+        return $pd;
+    }
+
     public function countButsByGameByPLayer() : array
     {
         $buts = [];
@@ -96,13 +105,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $pd;
     }
 
-    public function showResultByGameByPlayer(): array
+    public function showResultByGameByPlayer()
     {
+        $resultats = [];
+
         foreach ($this->getStatistiques() as $statistique) {
-            $pd[] = $statistique->getResultat();
+            $resultats[] = $statistique->getResultat();
         }
-        return $pd;
+        return $resultats;
     }
+
 
     public function countTotalGames()
     {
