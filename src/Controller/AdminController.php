@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Entity\Statistique;
 use App\Entity\User;
-use App\Form\statByPlayer;
 use App\Form\GameType;
 use App\Form\StatByPlayerType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/new/game", name="new_game")
+     * @Route("/new/game/", name="new_game")
      */
     public function newGame(ManagerRegistry $managerRegistry, Request $request, EntityManagerInterface $entityManager) : Response
     {
@@ -34,7 +33,8 @@ class AdminController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Le match a bien été crée !');
-            return $this->redirectToRoute('admin_new_stats', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('danger', 'Attention, n\'oublie pas de renseigner les statistiques de tous les joueurs présents au match !');
+            return $this->redirectToRoute('admin_new_stats',[], Response::HTTP_SEE_OTHER);
         }
         return $this->render('admin/newGame.html.twig', [
             "form" => $form->createView(),
@@ -49,10 +49,10 @@ class AdminController extends AbstractController
     {
         $users = $managerRegistry->getRepository(User::class)->findAll();
         $statistiques = new Statistique();
+        $game = $this->getUser();
         $form = $this->createForm(StatByPlayerType::class, $statistiques);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $entityManager->persist($statistiques);
             $entityManager->flush();
 

@@ -105,16 +105,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $pd;
     }
 
-    public function showResultByGameByPlayer()
+    public function showResultByGameByPlayer(): array
     {
         $resultats = [];
 
         foreach ($this->getStatistiques() as $statistique) {
             $resultats[] = $statistique->getResultat();
         }
+
         return $resultats;
     }
-
 
     public function countTotalGames()
     {

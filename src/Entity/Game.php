@@ -43,6 +43,7 @@ class Game
     {
         $this->user = new ArrayCollection();
         $this->statistiques = new ArrayCollection();
+        $this->date = new \DateTime('now');
     }
 
     public function getDateGame(): string

@@ -24,13 +24,10 @@ class StatController extends AbstractController
      */
     public function showStatByPlayer(ManagerRegistry $managerRegistry): Response
     {
-        $user = $userRepository = $managerRegistry->getRepository(User::class);
-        $game = $gameRepository = $managerRegistry->getRepository(Game::class);
-        $statistiques = $statistiqueRepository = $managerRegistry->getRepository( Statistique::class);
+        $gameRepository = $managerRegistry->getRepository(Game::class);
+        $games = $gameRepository->findBy([], ['date'=>'ASC']);
         return $this->render('stat/statByPlayer.html.twig', [
-            'user' => $user,
-            'game' => $game,
-            'statistiques' => $statistiques,
+            'games' => $games,
         ]);
     }
     /**
@@ -39,9 +36,11 @@ class StatController extends AbstractController
     public function showStatAllPlayers(StatistiqueRepository $statistiqueRepository, ManagerRegistry $managerRegistry):Response
     {
         $users = $managerRegistry->getRepository(User::class)->findAll();
+        $statistiqueRepository = $managerRegistry->getRepository(Statistique::class);
+        $results = $statistiqueRepository->findBy([], [], 3);
         return $this->render('stat/statAllPlayers.html.twig', [
             'users' => $users,
-            'statistiques'  => $statistiqueRepository->lastOne(),
+            'results' => $results,
         ]);
     }
 }

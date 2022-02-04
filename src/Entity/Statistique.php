@@ -25,12 +25,12 @@ class Statistique
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $buts;
+    private $buts ;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $resultat;
+    private $resultat ;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="statistiques")

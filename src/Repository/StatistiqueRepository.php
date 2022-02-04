@@ -22,7 +22,7 @@ class StatistiqueRepository extends ServiceEntityRepository
      /**
       * @return Statistique[] Returns an array of Statistique objects
       */
-
+/*
     public function lastOne()
     {
         return $this->createQueryBuilder('s')
