@@ -17,11 +17,11 @@ class GameType extends AbstractType
     {
         $builder
             ->add('date', DateType::class, [
-                'widget' => 'choice',
+                'widget' => 'single_text',
                 'label'  => 'Date du match : ',
             ])
             ->add('fiveLink', TextType::class, [
-                'label' => 'Lien vers le match : ',
+                'label' => 'Lien vers le match du five : ',
                 'attr' => [
                     'class' => 'form-control',
                 ],

@@ -10,6 +10,7 @@ class GameFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
     }
  }
 

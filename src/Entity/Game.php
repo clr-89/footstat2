@@ -43,12 +43,14 @@ class Game
     {
         $this->user = new ArrayCollection();
         $this->statistiques = new ArrayCollection();
+        $this->date = new \DateTime('now');
     }
 
     public function getDateGame(): string
     {
         return $this->getDate()->format('d-m-Y');
     }
+
 
     public function getId(): ?int
     {

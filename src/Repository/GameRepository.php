@@ -19,10 +19,10 @@ class GameRepository extends ServiceEntityRepository
         parent::__construct($registry, Game::class);
     }
 
-    // /**
-    //  * @return Game[] Returns an array of Game objects
-    //  */
-    /*
+     /**
+      * @return Game[] Returns an array of Game objects
+      */
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('g')
@@ -34,7 +34,7 @@ class GameRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Game

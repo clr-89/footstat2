@@ -1,4 +1,4 @@
-<!-- Navbar -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand d-flex flex-row fs-1 me-5" href="/">Footstat <img class="foot-navbar d-none d-sm-block ms-2" src="{{ asset('build/images/ballon.png')}}"></a>
@@ -8,8 +8,8 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                     {% if app.user %}
-                        <a class="nav-link active fs-3 me-5" aria-current="page" href="/profile">Stats générales</a>
-                        <a class="nav-link fs-3 me-5" href="/">Stats de {{ app.user.pseudo }}
+                        <a class="nav-link active fs-3 me-5" aria-current="page" href="{{ path('stat_players') }}">Stats générales</a>
+                        <a class="nav-link fs-3 me-5" href="{{ path('stat_player') }}">Stats de {{ app.user.pseudo }}
                             {% if app.user.picture %}
                             <img class="user-picture rounded-circle" src="{{ asset('build/images/' ~ app.user.picture) }}">
                             {% endif %}

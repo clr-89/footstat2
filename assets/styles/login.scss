@@ -1,10 +1,16 @@
 .login {
 
-    label {
+    min-height: 100vh;
+    h1 {
+        font-family: "Bebas Neue", cursive;
+    }
+
+    label, .btn {
         font-family: "Bebas Neue", cursive;
     }
 
     input {
         font-family: Arial, Helvetica, sans-serif;
     }
+
 }

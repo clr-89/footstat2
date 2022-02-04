@@ -6,18 +6,18 @@
     {% if error %}
         <div class="alert alert-danger text-center mt-3">Tes identifiants sont invalides</div>
     {% endif %}
-<div class="login d-flex justify-content-center">
-    <form class="w-50 py-2 my-5 d-flex flex-column py-3" action="{{ path('login') }}" method="post">
-        <label class="text-light text-center my-2 fs-3" for="username">Email</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
-
-        <label class="text-light text-center my-2 fs-3" for="password">Mot de passe</label>
-        <input type="password" id="password" name="_password"/>
-
-        {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"/> #}
-
-        <button class="btn mt-5 bg-white rounded bg-primary mx-auto" type="submit">Se connecter</button>
-    </form>
+<div class="login container-fluid">
+        <h1 class="mt-5 text-light text-center pb-3 m-5 border-bottom border-primary border-3 fs-1">Connecte-toi</h1>
+    <div class="d-flex justify-content-center">
+        <form class="py-2 my-5 d-flex align-items-center flex-column py-3" action="{{ path('login') }}" method="post">
+            <label class="text-light text-center my-2 fs-3" for="username">Email</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+            <label class="text-light text-center my-2 fs-3" for="password">Mot de passe</label>
+            <input type="password" id="password" name="_password"/>
+            {# If you want to control the URL the user is redirected to on success
+            <input type="hidden" name="_target_path" value="/account"/> #}
+            <button class="btn mt-5 bg-white rounded bg-primary mx-auto" type="submit">Se connecter</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

@@ -19,22 +19,20 @@ class StatistiqueRepository extends ServiceEntityRepository
         parent::__construct($registry, Statistique::class);
     }
 
-    // /**
-    //  * @return Statistique[] Returns an array of Statistique objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Statistique[] Returns an array of Statistique objects
+      */
+/*
+    public function lastOne()
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('s.id', 'DESC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Statistique
