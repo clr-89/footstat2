@@ -39,9 +39,9 @@ class StatByPlayerType extends AbstractType
             ->add('buts')
             ->add('resultat', ChoiceType::class, [
                 'choices' => [
-                    'V' => 'V',
-                    'D' => 'D',
-                    'N' => 'N',
+                    'Victoire' => 'V',
+                    'Défaite' => 'D',
+                    'Nul' => 'N',
                 ],
             ])
         ;

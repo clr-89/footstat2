@@ -55,8 +55,8 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('footstat@footstat.com', 'Footstat'))
                     ->to($user->getEmail())
-                    ->subject('Merci de confirmer ton Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->subject('Profil crée sur footstat')
+                    ->htmlTemplate('registration/confirmation.html.twig')
             );
             $this->addFlash('success', 'Le joueur  a bien été crée !');
 

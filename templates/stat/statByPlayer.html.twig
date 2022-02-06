@@ -26,7 +26,7 @@
             </div>
        <table class="d-flex justify-content-center border-top border-light mx-5 py-3">
            <tr class="text-primary border-bottom border-primary fs-2">
-               <td class="pe-4">Date</td>
+               <td class="ps-3 pe-4">Date</td>
                <td class="pe-4">Résultat</td>
                <td class="pe-4">But(s)</td>
                <td class="pe-4">PD</td>
@@ -34,7 +34,7 @@
            </tr>
             {% for game in app.user.games %}
                 <tr class="bg-dark text-light border-bottom border-secondary  fs-3">
-                    <td class="w-25 pe-3 py-2">{{ game.dateGame }}</td>
+                    <td class="w-25 ps-3 pe-3 py-2">{{ game.dateGame }}</td>
 
                     {% if app.user.showResultByGameByPlayer %}
                         <td class="text-center pe-3">

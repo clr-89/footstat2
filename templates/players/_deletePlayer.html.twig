@@ -1,0 +1,5 @@
+
+<form  method="post" action="{{ path('admin_delete_player', {'id': user.id}) }}" class="text-light" onsubmit="return confirm('Attention !!! Vous allez supprimer ce joueur ainsi que ses statistiques. Confirmez-vous la suppression ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+    <button class="btn text-danger border-danger fs-4 mt-4">Supprimer ce joueur<i class="text-danger ps-3 fas fa-trash-alt"></i></button>
+</form>
