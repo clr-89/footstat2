@@ -7,27 +7,25 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                    {% if app.user %}
-                        <a class="nav-link active fs-3 me-5" aria-current="page" href="{{ path('stat_players') }}">Stats générales</a>
-                        <a class="nav-link fs-3 me-5" href="{{ path('stat_player') }}">Stats de {{ app.user.pseudo }}
-                            {% if app.user.picture %}
-                            <img class="user-picture rounded-circle" src="{{ asset('/images/user/' ~ app.user.picture) }}">
-                            {% endif %}
-                        </a>
-                        {% for role in app.user.roles %}
-                            {% if role == 'ROLE_ADMIN' %}
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle fs-3 me-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Admin
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item fs-4 me-5" href="{{ path('admin_new_game') }}">Créer une partie</a>
-                                        <a class="dropdown-item fs-4 me-5" href="{{ path('admin_new_stats') }}">Créer des statistiques par joueur</a>
-                                        <li><a class="dropdown-item fs-4" href="{{ path('app_register') }}">Créer un joueur</a></li>
-                                    </ul>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
+                {% if app.user %}
+                <a class="nav-link active fs-3 me-5" aria-current="page" href="{{ path('stat_players') }}">Stats générales</a>
+                <a class="nav-link fs-3 me-5" href="{{ path('stat_player') }}">Stats de {{ app.user.pseudo }}
+                     {% if app.user.picture %}
+                        <img class="user-picture rounded-circle" src="{{ asset('/images/user/' ~ app.user.picture) }}">
+                     {% endif %}
+               </a>
+                     {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fs-3 me-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin
+                            </a>
+                               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item fs-4 me-5" href="{{ path('admin_new_game') }}">Créer une partie</a>
+                                  <a class="dropdown-item fs-4 me-5" href="{{ path('admin_new_stats') }}">Créer des statistiques par joueur</a>
+                                   <a class="dropdown-item fs-4" href="{{ path('app_register') }}">Créer un joueur</a>
+                                </ul>
+                         </li>
+                     {% endif %}
                 <a class="nav-link fs-3 me-5" href="{{ path('app_logout') }}"> Se déconnecter </a>
                 {% else %}
                 <a class="nav-link fs-3 me-5" href="{{ path('login') }}"> Se connecter <i class="fa-solid fa-user fs-4"></i></a>

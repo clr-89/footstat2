@@ -3,7 +3,7 @@
 {% block title %}Statistiques du joueur {% endblock %}
 
 {% block body %}
-   <div class="statistique overflow-hidden">
+   <div class="statistique">
         {% if app.user %}
             <p class="text-center"><img class="user-picture rounded-circle m-3" src="{{ asset('/images/user/' ~ app.user.picture) }}"></p>
         <h1 class="text-light text-center pb-3 mt-1 mb-5 mx-5 border-bottom border-primary border-3 fs-1">Statistiques de {{ app.user.pseudo }}</h1>
