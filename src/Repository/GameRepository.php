@@ -23,13 +23,11 @@ class GameRepository extends ServiceEntityRepository
       * @return Game[] Returns an array of Game objects
       */
 
-    public function findByExampleField($value)
+    public function orderingByDateGame()
     {
         return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
             ->orderBy('g.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(2)
             ->getQuery()
             ->getResult()
         ;

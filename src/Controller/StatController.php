@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Repository\GameRepository;
 use App\Repository\StatistiqueRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,12 +23,12 @@ class StatController extends AbstractController
     /**
      * @Route("/stat", name="player")
      */
-    public function showStatByPlayer(ManagerRegistry $managerRegistry): Response
+    public function showStatByPlayer(ManagerRegistry $managerRegistry, EntityManagerInterface $entityManager): Response
     {
         $gameRepository = $managerRegistry->getRepository(Game::class);
-        $games = $gameRepository->findBy([], ['date'=>'ASC']);
+        $games = $gameRepository->findBy([], ['id'=>'ASC']);
         return $this->render('stat/statByPlayer.html.twig', [
-            'games' => $games,
+
         ]);
     }
     /**
