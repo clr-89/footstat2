@@ -11,7 +11,7 @@
                         <a class="nav-link active fs-3 me-5" aria-current="page" href="{{ path('stat_players') }}">Stats générales</a>
                         <a class="nav-link fs-3 me-5" href="{{ path('stat_player') }}">Stats de {{ app.user.pseudo }}
                             {% if app.user.picture %}
-                            <img class="user-picture rounded-circle" src="{{ asset('build/images/' ~ app.user.picture) }}">
+                            <img class="user-picture rounded-circle" src="{{ asset('/images/user/' ~ app.user.picture) }}">
                             {% endif %}
                         </a>
                         {% for role in app.user.roles %}
