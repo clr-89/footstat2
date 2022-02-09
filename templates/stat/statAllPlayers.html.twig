@@ -9,11 +9,9 @@
             <tr class="text-primary border-bottom border-primary">
                 <th></th>
                 <th class="pe-1">Joueur</th>
-                {% for role in app.user.roles %}
-                    {% if role  == 'ROLE_ADMIN' %}
+                    {% if is_granted('ROLE_ADMIN') %}
                 <th class="pe-2">Matchs</th>
                     {% endif %}
-                {% endfor %}
                 <th class="pe-2">But(s)</th>
                 <th class="pe-3">PD</th>
                 <th class="pe-2">Derniers matchs</th>
@@ -21,20 +19,19 @@
                 <th>PD/ match</th>
             </tr>
             {% for user in users %}
+                {% if user.isVisible %}
                 <tr class="bg-dark text-light border-bottom border-secondary fs-5">
                     <th class="pe-1">
                         {% if user.picture %}
                             <img class="player-picture rounded-circle" src="{{ asset('/images/user/' ~ user.picture) }}">
                         {% endif %}</th>
-                    <th class="w-25 pe-1 py-2">{{ user.pseudo }}</th>
-                    {% for role in app.user.roles %}
-                        {% if role  == 'ROLE_ADMIN' %}
-                    <td class="">{{ user.countTotalGames }}</td>
+                    <th class="w-25 py-2">{{ user.pseudo }}</th>
+                        {% if is_granted('ROLE_ADMIN') %}
+                    <td class="text-center">{{ user.countTotalGames }}</td>
                         {% endif %}
-                    {% endfor %}
-                    <td class="">{{ user.countButsByPlayer }}</td>
-                    <td class="">{{ user.countPassesDecisivesByPlayer }}</td>
-                    <td class="">
+                    <td class="text-center">{{ user.countButsByPlayer }}</td>
+                    <td class="text-center pe-3">{{ user.countPassesDecisivesByPlayer }}</td>
+                    <td class="w-25">
                         {% for resultat in user.showResultByGameByPlayer %}
                             {% if resultat == 'V' %}
                                 <i class="text-primary fas fa-circle"></i>
@@ -45,9 +42,10 @@
                             {% endif %}
                         {% endfor %}
                     </td>
-                    <td class="">{% if user.countTotalGames > 0 %}{{ (user.countButsByPlayer / user.countTotalGames) | round(1, 'floor')}}{% endif %}</td>
-                    <td class=""> {% if user.countTotalGames > 0 %}{{ (user.countPassesDecisivesByPlayer / user.countTotalGames) | round(1, 'floor')}}{% endif %}</td>
+                    <td class="text-center">{% if user.countTotalGames > 0 %}{{ (user.countButsByPlayer / user.countTotalGames) | round(1, 'floor')}}{% endif %}</td>
+                    <td class="text-center"> {% if user.countTotalGames > 0 %}{{ (user.countPassesDecisivesByPlayer / user.countTotalGames) | round(1, 'floor')}}{% endif %}</td>
                 </tr>
+                {% endif %}
             {% endfor %}
         </table>
     </div>

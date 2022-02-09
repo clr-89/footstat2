@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,7 +29,18 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Email  '
                 ])
             ->add('imageFile', VichImageType::class, [
-                'label' => 'photo de profil'
+                'label' => 'photo de profil',
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => '...',
+                'download_label' => '...',
+                'download_uri' => true,
+                'image_uri' => true,
+                'asset_helper' => true,
+            ])
+            ->add('isVisible', CheckboxType::class, [
+                'required' => false,
+                'label' => 'afficher sur les stats générales'
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,

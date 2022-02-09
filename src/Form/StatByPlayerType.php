@@ -17,31 +17,14 @@ class StatByPlayerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('game', EntityType::class, [
-                'class' => Game::class,
-                'label' => 'Choisis le match ',
-                'choice_label' => 'dateGame',
-                'multiple' => false,
-                'expanded' => false,
-                'query_builder' => function (GameRepository $game) {
-                    return $game ->createQueryBuilder('g')->orderBy('g.date', 'DESC');
-            }
-            ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'label' => 'Choisis le joueur ',
-                'by_reference' => false,
-                'choice_label' => 'pseudo',
-                'multiple' => false,
-                'expanded' => false,
-            ])
+
             ->add('passesDecisives')
             ->add('buts')
             ->add('resultat', ChoiceType::class, [
                 'choices' => [
-                    'Victoire' => 'V',
-                    'Défaite' => 'D',
                     'Nul' => 'N',
+                    'Défaite' => 'D',
+                    'Victoire' => 'V',
                 ],
             ])
         ;

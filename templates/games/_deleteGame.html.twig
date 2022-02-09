@@ -1,0 +1,5 @@
+
+<form  method="post" action="{{ path('admin_delete_game', {'id': game.id}) }}" class="text-light" onsubmit="return confirm('Attention !!! Vous allez supprimer ce match ainsi que les statistiques des joueurs. Confirmez-vous la suppression ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ game.id) }}">
+    <button class="btn text-danger border-danger fs-4 mt-4">Supprimer ce match<i class="text-danger ps-3 fas fa-trash-alt"></i></button>
+</form>
