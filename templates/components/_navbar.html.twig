@@ -12,6 +12,8 @@
                 <a class="nav-link fs-3 me-5" href="{{ path('stat_player') }}">Stats de {{ app.user.pseudo }}
                      {% if app.user.picture %}
                         <img class="user-picture rounded-circle" src="{{ asset('/images/user/' ~ app.user.picture) }}">
+                    {% else %}
+                        <img class="user-picture rounded-circle" src="{{ asset('build/images/profil.jpeg') }}">
                      {% endif %}
                </a>
                      {% if is_granted('ROLE_ADMIN') %}
