@@ -24,6 +24,8 @@
                     <th class="pe-1">
                         {% if user.picture %}
                             <img class="player-picture rounded-circle" src="{{ asset('/images/user/' ~ user.picture) }}">
+                            {% else %}
+                            <img class="player-picture rounded-circle" src="{{ asset('build/images/profil.jpeg') }}">
                         {% endif %}</th>
                     <th class="w-25 py-2">{{ user.pseudo }}</th>
                         {% if is_granted('ROLE_ADMIN') %}

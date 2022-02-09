@@ -3,9 +3,13 @@
 {% block title %}Statistiques du joueur {% endblock %}
 
 {% block body %}
-   <div class="statistique">
+   <div class="statistique mt-3">
         {% if app.user %}
+            {% if app.user.picture %}
             <p class="text-center"><img class="user-picture rounded-circle m-3" src="{{ asset('/images/user/' ~ app.user.picture) }}"></p>
+                {% else %}
+             <p class="text-center"><img class="user-picture rounded-circle" src="{{ asset('build/images/profil.jpeg') }}">
+            {% endif %}
         <h1 class="text-light text-center pb-3 mt-1 mb-5 mx-5 border-bottom border-primary border-3 fs-1">Statistiques de {{ app.user.pseudo }}</h1>
             <h2 class="text-primary text-center fs-2 mx-5 my-3">Mes stats générales</h2>
             <div class="d-flex flex-column mt-3">
@@ -26,12 +30,13 @@
             </div>
        <table class="d-flex justify-content-center border-top border-light mx-5 py-3">
            <tr class="text-primary border-bottom border-primary fs-2">
-               <td class="ps-3 pe-4">Date</td>
-               <td class="pe-4">Résultat</td>
-               <td class="pe-4">But(s)</td>
-               <td class="pe-4">PD</td>
-               <td class="p-4">Lien match</td>
+               <td class="ps-3 pe-4 fs-3">Date</td>
+               <td class="pe-3 fs-4">Résultat</td>
+               <td class="pe-3 fs-4">But(s)</td>
+               <td class="pe-3 fs-4">PD</td>
+               <td class="ps-2 fs-5">Lien match</td>
            </tr>
+
            {% for statistique in app.user.statistiques %}
 
                {{ dump(statistique.game.dateGame) }}
