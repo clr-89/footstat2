@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des matchs{% endblock %}
+
+{% block body %}
+    <div class="playerList container-fluid">
+        <h1 class="mt-5 text-light text-center pb-3 m-5 border-bottom border-primary border-3 fs-1">Sélectionner un match</h1>
+        <table class="d-flex justify-content-center fs-2">
+            <tr class="text-primary border-bottom border-primary">
+                <th class="pe-3 py-2">Match</th>
+                <th class="pe-3">Voir</th>
+            </tr>
+            {% for game in games %}
+                <tr class="bg-dark text-light border-bottom border-secondary fs-5">
+                    <td class="w-50 pe-4 fs-4 py-2">{{ game.dateGame }}</td>
+                    <td class="w-50 pe-2 text-center">
+                        <a class="text-warning" href="{{ path('admin_show_players_game', {'id': game.id}) }}"><i class="fas fa-eye"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <p class="mt-5 text-center">
+
+        </p>
+    </div>
+
+{% endblock %}

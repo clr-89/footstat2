@@ -27,15 +27,22 @@ class AdminController extends AbstractController
     {
         $users = $managerRegistry->getRepository(User::class)->findAll();
         $game = new Game();
+        $statistique = new Statistique();
         $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($game->getUser() as $user){
+                $statistique = new Statistique();
+                $statistique->setUser($user);
+                $statistique->setGame($game);
+                $entityManager->persist($statistique);
+            }
             $entityManager->persist($game);
             $entityManager->flush();
 
             $this->addFlash('success', 'Le match a bien été crée !');
-            $this->addFlash('danger', 'Attention, n\'oublie pas de renseigner les statistiques de tous les joueurs présents au match !');
-            return $this->redirectToRoute('admin_new_stats',[], Response::HTTP_SEE_OTHER);
+            $this->addFlash('danger', 'Attention, les statistiques du joueur sont initialisées à 0, donc n\'oublie pas de modifier les statistiques de tous les joueurs présents au match !');
+            return $this->redirectToRoute('admin_show_games_list',[], Response::HTTP_SEE_OTHER);
         }
         return $this->render('admin/newGame.html.twig', [
             "form" => $form->createView(),
@@ -44,70 +51,64 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/new/stats", name="new_stats")
+     * @Route("/games", name="show_games")
      */
-    public function newStatByPlayer(ManagerRegistry $managerRegistry, Request $request, EntityManagerInterface $entityManager) : Response
+    public function showGames(ManagerRegistry $managerRegistry)
     {
-        $users = $managerRegistry->getRepository(User::class)->findAll();
-        $statistiques = new Statistique();
-        $game = $this->getUser();
-        $form = $this->createForm(StatByPlayerType::class, $statistiques);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($statistiques);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Les stats du joueur ont bien été prises en compte !');
-            return $this->redirectToRoute('admin_new_stats', [], Response::HTTP_SEE_OTHER);
-        }
-        return $this->render('admin/statByPlayer.html.twig', [
-            "form" => $form->createView(),
-            'statistiques' => $statistiques,
+        $games = $managerRegistry->getRepository(Game::class)->findAll();
+        return $this->render('games/showGames.html.twig', [
+            'games' => $games,
         ]);
     }
 
     /**
-     * @Route("/players", name="show_players")
+     * @Route("/game/{id}/edit", name="edit_game", methods={"GET", "POST"})
      */
-    public function showPlayers(ManagerRegistry $managerRegistry)
+    public function editGame(ManagerRegistry $managerRegistry, Request $request, Game $game, EntityManagerInterface $entityManager) : Response
     {
-        $users = $managerRegistry->getRepository(User::class)->findAll();
-        return $this->render('players/showPlayers.html.twig', [
-            'users' => $users,
-        ]);
-    }
-
-    /**
-     * @Route("/player/{id}/edit", name="edit_player", methods={"GET", "POST"})
-     */
-    public function editPlayer(Request $request, User $user, EntityManagerInterface $entityManager) : Response
-    {
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $statistiques = $managerRegistry->getRepository(Statistique::class)->findByGame($game);
+            $names = [];
+            foreach ($statistiques as $stat) {
+                $names[] = $stat->getUser()->getPseudo();
+            }
+            foreach ($game->getUser() as $user){
+                if (!in_array($user->getPseudo(), $names)) {
+                    $statistique = new Statistique();
+                    $statistique->setUser($user);
+                    $statistique->setGame($game);
+                    $entityManager->persist($statistique);
+                }
+            }
             $entityManager->flush();
 
-            return  $this->redirectToRoute('admin_show_players', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Le match a bien été modifié.');
+            return  $this->redirectToRoute('admin_show_games', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('players/_editPlayer.html.twig', [
-            'user'  => $user,
+        return $this->renderForm('games/_editGame.html.twig', [
+            'game'  => $game,
             'form'     => $form,
         ]);
     }
 
     /**
-     * @Route("/player/{id}/delete", name="delete_player", methods={"POST"})
+     * @Route("/game/{id}/delete", name="delete_game", methods={"POST"})
      */
-    public function deletePLayer(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    public function deleteGame(Request $request, Game $game, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token')))
+        if ($this->isCsrfTokenValid('delete' . $game->getId(), $request->request->get('_token')))
         {
-            $entityManager->remove($user);
+            foreach ($game->getStatistiques() as $statistique) {
+                $entityManager->remove($statistique);
+            }
+            $entityManager->remove($game);
             $entityManager->flush();
-            $this->addFlash('success', 'Le joueur a bien été supprimé.');
+            $this->addFlash('success', 'Le match a bien été supprimé.');
         }
-        return $this->redirectToRoute('admin_show_players', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_show_games', [], Response::HTTP_SEE_OTHER);
     }
 }

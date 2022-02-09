@@ -7,7 +7,7 @@
         <h1 class="mt-5 text-light text-center pb-3 m-5 border-bottom border-primary border-3 fs-1">Liste des joueurs</h1>
         <table class="d-flex justify-content-center fs-2">
             <tr class="text-primary border-bottom border-primary">
-                <th class="pe-3 py-2">Joueurs</th>
+                <th class="pe-3 py-2">Joueur</th>
                 <th class="pe-3">Modifier</th>
             </tr>
             {% for user in users %}
@@ -20,7 +20,7 @@
             {% endfor %}
         </table>
         <p class="mt-5 text-center">
-            <a class="text-light fs-2" href="{{ path('app_register') }}">Créer un nouveau joueur<i class="ps-3 fas fa-user-plus"></i></a>
+            <a class="text-light fs-4" href="{{ path('app_register') }}">Créer un nouveau joueur<i class="ps-3 fas fa-user-plus"></i></a>
         </p>
      </div>
 

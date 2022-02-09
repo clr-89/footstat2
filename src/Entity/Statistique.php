@@ -20,17 +20,17 @@ class Statistique
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $passesDecisives;
+    private $passesDecisives = 0;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $buts ;
+    private $buts = 0;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $resultat ;
+    private $resultat = 'nul';
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="statistiques")
@@ -47,6 +47,17 @@ class Statistique
     {
         return $this->id;
     }
+
+    public function countButsByGameByPLayer() : array
+    {
+        $buts = [];
+        foreach ($this->getStatistiques() as $statistique) {
+            $buts[] = $statistique->getButs();
+        }
+        dump($buts);
+        return $buts;
+    }
+
 
     public function getPassesDecisives(): ?int
     {
