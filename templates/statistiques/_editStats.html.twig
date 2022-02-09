@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les statistiques {% endblock %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+
+{% block body %}
+    <div class="new-game">
+        <div class='container-fluid text-white text-center pt-5'>
+            <h1 class="mt-2 text-light text-center pb-3 m-5 border-bottom border-primary border-3 fs-1">Modifier les statistiques de <span class="text-danger">{{ user.pseudo }}</span> pour le match du <span class="text-danger">{{ game.dateGame }}</span></h1>
+            {{ include('statistiques/_form.html.twig', {'button_label': 'Mettre à jour ces statistiques'}) }}
+            <div>{{ include('statistiques/_deleteStats.html.twig') }}</div>
+            <div class="mt-4">
+                <a class="text-light" href="{{ path('admin_show_players_game', { id: game.id }) }}">Retour à la liste des joueurs du match</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

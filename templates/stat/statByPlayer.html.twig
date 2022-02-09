@@ -36,34 +36,44 @@
                <td class="pe-3 fs-4">PD</td>
                <td class="ps-2 fs-5">Lien match</td>
            </tr>
-            {% for game in app.user.games %}
-                <tr class="bg-dark text-light border-bottom border-secondary  fs-3">
-                    <td class="w-25 ps-2 pe-3 py-2 text-center">{{ game.dateGame }}</td>
 
-                    {% if app.user.showResultByGameByPlayer %}
-                        <td class="w-25 text-center pe-3">
-                            {% if app.user.showResultByGameByPlayer[loop.index-1] == 'V' %}
-                                <i class="text-primary fs-5 fas fa-circle"></i>
-                            {% elseif app.user.showResultByGameByPlayer[loop.index-1] == 'D' %}
-                                <i class="text-danger fs-5 fas fa-circle"></i>
-                                {% elseif app.user.showResultByGameByPlayer[loop.index-1] == 'N' %}
-                                    <i class="text-warning fs-5 fas fa-circle"></i>
-                            {% endif %}
-                        </td>
+           {% for statistique in app.user.statistiques %}
+
+               {{ dump(statistique.game.dateGame) }}
+           {% endfor %}
+          {#   {% for game in games %}
+                {% if game.isVisible %}
+                    {% for user in game.user %}
+                        {% if user.pseudo == app.user.pseudo %}
+                            <tr class="bg-dark text-light border-bottom border-secondary  fs-3">
+                                <td class="w-25 ps-3 pe-3 py-2">{{ game.dateGame }}</td>
+                                {% if app.user.showResultByGameByPlayer %}
+                                    <td class="text-center pe-3">
+                                        {% if app.user.showResultByGameByPlayer[loop.index-1] == 'V' %}
+                                            <i class="text-primary fs-5 fas fa-circle"></i>
+                                        {% elseif app.user.showResultByGameByPlayer[loop.index-1] == 'D' %}
+                                            <i class="text-danger fs-5 fas fa-circle"></i>
+                                        {% elseif app.user.showResultByGameByPlayer[loop.index-1] == 'N' %}
+                                            <i class="text-warning fs-5 fas fa-circle"></i>
+                                        {% endif %}
+                                    </td>
+                                {% endif %}
+                                {% if app.user.countButsByGameByPLayer %}
+                                    <td class="pe-3"> {{ app.user.countButsByGameByPLayer[loop.index-1] }}</td>
+                                {% endif %}
+                                {% if app.user.countPassesDecisivesByGameByPlayer %}
+                                    <td class="">{{app.user.countPassesDecisivesByGameByPlayer[loop.index-1] }}</td>
+                                {% endif %}
+                                {% if game.fiveLink %}
+                                    <td class="w-25 py-2 "><a target="_blank" href="{{ game.fiveLink }}"><i class="ps-3 text-primary fas fa-link"></i></a></td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
                     {% endif %}
-                    {% if app.user.countButsByGameByPLayer %}
-                        <td class="w-25 pe-1 text-center"> {{ app.user.countButsByGameByPLayer[loop.index-1] }}</td>
-                    {% endif %}
-                    {% if app.user.countPassesDecisivesByGameByPlayer %}
-                        <td class="w-25 text-center">{{app.user.countPassesDecisivesByGameByPlayer[loop.index-1] }}</td>
-                    {% endif %}
-                    {% if game.fiveLink %}
-                        <td class="w-25 py-2 text-center "><a target="_blank" href="{{ game.fiveLink }}"><i class="ps-3 text-primary fas fa-link"></i></a></td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
+                {% endfor %} #}
 
         </table>
-         {% endif %}
+      {% endif %}
    </div>
 {% endblock %}

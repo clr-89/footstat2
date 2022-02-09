@@ -60,7 +60,7 @@ class RegistrationController extends AbstractController
             );
             $this->addFlash('success', 'Le joueur  a bien été crée !');
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_register');
         }
 
         return $this->render('registration/register.html.twig', [

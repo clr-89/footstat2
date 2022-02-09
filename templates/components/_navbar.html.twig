@@ -22,10 +22,13 @@
                                 Admin
                             </a>
                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item fs-4 me-5" href="{{ path('admin_new_game') }}">Créer une partie</a>
-                                  <a class="dropdown-item fs-4 me-5" href="{{ path('admin_new_stats') }}">Créer des statistiques par joueur</a>
-                                  <a class="dropdown-item fs-4" href="{{ path('app_register') }}">Créer un joueur</a>
-                                  <a class="dropdown-item fs-4" href="{{ path('admin_show_players') }}">Modifier un joueur</a>
+                                   <a class="dropdown-item fs-4 me-5" href="{{ path('admin_new_game') }}"><i class="fas fa-futbol pe-2"></i>Créer un match</a>
+                                   <a class="dropdown-item fs-4" href="{{ path('app_register') }}"><i class="fas fa-child pe-2"></i>Créer un joueur</a>
+                                   <li><hr class="dropdown-divider"></li>
+                                   <a class="dropdown-item fs-4" href="{{ path('admin_show_games') }}"><i class="fas fa-futbol pe-2"></i>Modifier un match</a>
+                                   <a class="dropdown-item fs-4" href="{{ path('admin_show_players') }}"><i class="fas fa-child pe-2"></i>Modifier un joueur</a>
+                                   <a class="dropdown-item fs-4" href="{{ path('admin_show_games_list') }}"><i class="fas fa-chart-area pe-2"></i>Modifier les statistiques d'un joueur</a>
+                                   <li><hr class="dropdown-divider"></li>
                                 </ul>
                          </li>
                      {% endif %}

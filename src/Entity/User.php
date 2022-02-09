@@ -85,6 +85,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVisible = true;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
@@ -127,6 +132,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->imageName;
     }
 
+    public function statsbyGame()
+    {
+        $statistique = [];
+     foreach($this->getGames() as $game){
+         $statistique[] = $game->getStatistiques();
+     }
+
+     return $statistique;
+    }
+
     public function countButsByPlayer()
     {
         $buts = 0;
@@ -151,6 +166,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         foreach ($this->getStatistiques() as $statistique) {
             $buts[] = $statistique->getButs();
         }
+        dump($buts);
         return $buts;
     }
 
@@ -167,7 +183,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $resultats = [];
 
-        foreach ($this->getStatistiques() as $statistique) {
+        foreach (array_slice($this->getStatistiques()->toArray(), -5) as $statistique) {
             $resultats[] = $statistique->getResultat();
         }
 
@@ -357,6 +373,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $statistique->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsVisible(): ?bool
+    {
+        return $this->isVisible;
+    }
+
+    public function setIsVisible(bool $isVisible): self
+    {
+        $this->isVisible = $isVisible;
 
         return $this;
     }
