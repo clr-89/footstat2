@@ -1,11 +1,19 @@
 .home {
-    min-height: 80vh;
+    min-height: 100vh;
     h1 {
         font-family: "Bebas Neue", cursive;
+        padding-top: 10%;
+        margin-bottom: 15%;
     }
     .img-home {
         margin-bottom: 10%;
     }
+
+    .img-mobile {
+        width: 150%;
+        padding-top: 15%;
+    }
+
     p {
         font-family: 'Oswald', sans-serif;
     }

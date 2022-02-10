@@ -5,7 +5,7 @@
 {% block body %}
     <div class="statistique container-fluid">
         <h1 class="mt-5 text-light text-center pb-3 m-5 border-bottom border-primary border-3 fs-1">Statistiques générales</h1>
-        <table class="d-flex justify-content-center">
+        <table class="d-flex justify-content-center mb-5">
             <tr class="text-primary border-bottom border-primary">
                 <th></th>
                 <th class="pe-1">Joueur</th>
@@ -39,8 +39,10 @@
                                 <i class="text-primary fas fa-circle"></i>
                             {% elseif resultat == 'D'%}
                                 <i class="text-danger fas fa-circle"></i>
-                            {% else %}
+                            {% elseif resultat == 'N' %}
                                 <i class="text-warning fas fa-circle"></i>
+                            {% else %}
+                                -
                             {% endif %}
                         {% endfor %}
                     </td>

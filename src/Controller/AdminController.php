@@ -42,7 +42,7 @@ class AdminController extends AbstractController
 
             $this->addFlash('success', 'Le match a bien été crée !');
             $this->addFlash('danger', 'Attention, les statistiques du joueur sont initialisées à 0, donc n\'oublie pas de modifier les statistiques de tous les joueurs présents au match !');
-            return $this->redirectToRoute('admin_show_games_list',[], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_show_players_game',['id' => $game->getId()], Response::HTTP_SEE_OTHER);
         }
         return $this->render('admin/newGame.html.twig', [
             "form" => $form->createView(),
@@ -86,7 +86,7 @@ class AdminController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Le match a bien été modifié.');
-            return  $this->redirectToRoute('admin_show_games', [], Response::HTTP_SEE_OTHER);
+            return  $this->redirectToRoute('admin_show_players_game', ['id' => $game->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('games/_editGame.html.twig', [

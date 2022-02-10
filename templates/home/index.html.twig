@@ -11,13 +11,12 @@
         {% endfor %}
     {% endfor %}
     <div class="home">
-        <h1 class="text-center text-light my-5">Bienvenue sur Footstat</h1>
-        <p class="fs-4 mx-auto text-center text-light w-75 border-bottom border-top border-primary border-3 px-3 py-2 rounded">Viens te mesurer à tes potes !
-        <div class="text-center">
-            <img class="my-5" src="{{ asset('build/images/ballonbouge.gif') }}">
-            <img class="img-home mx-auto w-50 d-none d-sm-block" src="{{ asset('build/images/stat.jpeg') }}">
-            <img class="mx-auto w-100 d-block mb-1 mt-5 d-sm-none my-5" src="{{ asset('build/images/stat.jpeg') }}">
-        </div>
+        <h1 class="text-center text-light fs-1">Bienvenue sur Footstat</h1>
+        <p class="fs-3 mx-auto text-center text-light w-75 border-bottom border-top border-primary border-3 px-3 py-2 rounded">Viens te mesurer à tes potes !
+            <div class="text-center mt-5">
+                <img class="img-home mx-auto w-50 d-none d-sm-block" src="{{ asset('build/images/stat.jpeg') }}">
+                <img class="img-mobile mx-auto d-block d-sm-none mt-5" src="{{ asset('build/images/stat.jpeg') }}">
+            </div>
         </p>
     </div>
 

@@ -28,7 +28,7 @@
                     {% endif %}
                 </span>
             </div>
-       <table class="d-flex justify-content-center border-top border-light mx-5 py-3">
+       <table class="d-flex justify-content-center border-top border-light mx-5 py-3 mb-5">
            <tr class="text-primary border-bottom border-primary fs-2">
                <td class="ps-3 pe-4 fs-3">Date</td>
                <td class="pe-3 fs-4">Résultat</td>
@@ -38,9 +38,31 @@
            </tr>
 
            {% for statistique in app.user.statistiques %}
-
-               {{ dump(statistique.game.dateGame) }}
+           <tr class="bg-dark text-light border-bottom border-secondary  fs-3">
+               <td class="w-25 ps-1 pe-3 py-2">{{ statistique.game.dateGame }}</td>
+               <td class="text-center pe-3">
+                   {% if statistique.resultat == 'V' %}
+                       <i class="text-primary fs-5 fas fa-circle"></i>
+                   {% elseif statistique.resultat == 'D' %}
+                       <i class="text-danger fs-5 fas fa-circle"></i>
+                   {% elseif statistique.resultat == 'N' %}
+                       <i class="text-warning fs-5 fas fa-circle"></i>
+                   {% else%}
+                       -
+                   {% endif %}
+               </td>
+               <td class="pe-3"> {{ statistique.buts }}</td>
+               <td class="">{{ statistique.passesDecisives }}</td>
+               {% if statistique.game.fiveLink %}
+                <td class="w-25 py-2 "><a target="_blank" href="{{ statistique.game.fiveLink }}"><i class="ps-3 text-primary fas fa-link"></i></a></td>
+               {% endif %}
+           </tr>
            {% endfor %}
+       </table>
+       {% endif %}
+   </div>
+{% endblock %}
+
           {#   {% for game in games %}
                 {% if game.isVisible %}
                     {% for user in game.user %}
@@ -73,7 +95,3 @@
                     {% endif %}
                 {% endfor %} #}
 
-        </table>
-      {% endif %}
-   </div>
-{% endblock %}
