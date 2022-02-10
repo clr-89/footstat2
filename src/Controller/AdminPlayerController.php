@@ -61,9 +61,13 @@ class AdminPlayerController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token')))
         {
-            $entityManager->remove($user);
-            $entityManager->flush();
-            $this->addFlash('success', 'Le joueur a bien été supprimé.');
+            if($user === ['ROLE_USER']) {
+                $entityManager->remove($user);
+                $entityManager->flush();
+                $this->addFlash('success', 'Le joueur a bien été supprimé.');
+            } else {
+                $this->addFlash('danger', 'Tu ne peux pas supprimer ce joueur car c\'est aussi un administrateur.');
+            }
         }
         return $this->redirectToRoute('admin_show_players', [], Response::HTTP_SEE_OTHER);
     }

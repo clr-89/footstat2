@@ -88,7 +88,7 @@ class AdminStatController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Les statistiques du joueur ont bien été modifiées.');
-            return  $this->redirectToRoute('admin_show_games_list', [], Response::HTTP_SEE_OTHER);
+            return  $this->redirectToRoute('admin_show_players_game', ['id' => $game->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('statistiques/_editStats.html.twig', [

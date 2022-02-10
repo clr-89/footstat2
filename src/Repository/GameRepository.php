@@ -26,7 +26,7 @@ class GameRepository extends ServiceEntityRepository
     public function orderingByDateGame()
     {
         return $this->createQueryBuilder('g')
-            ->orderBy('g.id', 'ASC')
+            ->orderBy('g.dateGame', 'ASC')
             ->setMaxResults(2)
             ->getQuery()
             ->getResult()

@@ -30,7 +30,7 @@ class Statistique
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $resultat = 'nul';
+    private $resultat = '-';
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="statistiques")
@@ -47,6 +47,12 @@ class Statistique
     {
         return $this->id;
     }
+
+    public function getGameByDateOrder(): ?Game
+    {
+        return $game;
+    }
+
 
     public function countButsByGameByPLayer() : array
     {

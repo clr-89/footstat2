@@ -26,7 +26,7 @@ class StatController extends AbstractController
     public function showStatByPlayer(ManagerRegistry $managerRegistry, EntityManagerInterface $entityManager): Response
     {
         $gameRepository = $managerRegistry->getRepository(Game::class);
-        $games = $gameRepository->findBy([], ['date'=>'DESC']);
+        $games = $gameRepository->findBy(['id'=>1], ['id'=>'DESC']);
         return $this->render('stat/statByPlayer.html.twig', [
             'games' => $games
         ]);
