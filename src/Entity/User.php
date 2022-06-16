@@ -166,7 +166,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         foreach ($this->getStatistiques() as $statistique) {
             $buts[] = $statistique->getButs();
         }
-        dump($buts);
         return $buts;
     }
 
